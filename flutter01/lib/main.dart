@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './myFont.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,21 +19,33 @@ class MyApp extends StatelessWidget {
   }
 }
 
+List<String> colors = ['red', 'green', 'blue', 'yellow', 'pink', 'orange'];
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
+  List<Widget> initListData() {
+    List<Widget> list = [];
+    for (var i = 0; i < 6; i++) {
+      list.add(Container(
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          color: Colors.red,
+        ),
+        child: Text("$i"),
+      ));
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Icon(Icons.home),
-        Icon(Icons.settings, size: 20, color: Colors.red),
-        SizedBox(height: 20),
-        Icon(
-          MyFont.bijiben,
-          size: 40,
-        )
-      ],
+    return GridView.count(
+      crossAxisCount: 2, //列数
+      mainAxisSpacing: 10, //行间距
+      crossAxisSpacing: 10, //列间距
+      childAspectRatio: 0.7, //宽高比
+      children: initListData(),
     );
   }
 }
